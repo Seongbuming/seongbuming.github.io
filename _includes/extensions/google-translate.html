@@ -91,7 +91,7 @@ function googleTranslateElementInit() {
 
     if (target && target.matches('.lang-select')) {
       var lang = target.getAttribute('data-lang');
-      if (googleCombo.value == lang) {
+      if (googleCombo.value == lang || lang == "{{ lang }}") {
         restoreLang();
       } else {
         target.parentElement.classList.add('ct-language-selected');
