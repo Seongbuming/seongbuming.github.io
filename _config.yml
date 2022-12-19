@@ -26,7 +26,7 @@
 
 title: Seongbum Blog
 email: seo@seongbum.com
-author: Seongbuming
+author: Seongbum Seo
 
 # Copyright setting
 # You can use any html code, currently below placeholders are available:
@@ -40,14 +40,14 @@ author: Seongbuming
 #   "Copyright (c) 2017-{currentYear} <a href="https://example.com">{author}</a>"
 #   "Copyright © 2017-2021 Foobar"
 #
-copyright: "Copyright (cleft) {author}"
+copyright: "Copyright (c) <a href=\"https://seongbum.com\">{author}</a>"
 
 description: >- # this means to ignore newlines until "baseurl:"
   Seongbuming
 
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "" # the base hostname & protocol for your site, e.g. https://example.com
-favicon: "assets/images/icons/favicon.ico" # the favicon for your site
+favicon: "/assets/images/icons/favicon.ico" # the favicon for your site
 
 # Yat date format
 # refer to https://shopify.github.io/liquid/filters/date/ if you want to customize this
