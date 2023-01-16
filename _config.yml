@@ -65,6 +65,7 @@ yat:
 
 # Google analytics
 # google_analytics: [Tracking ID]
+google_analytics: G-8VXHVELG1D
 
 # If you want to generate website sitemap, you can set true
 # sitemap: false
