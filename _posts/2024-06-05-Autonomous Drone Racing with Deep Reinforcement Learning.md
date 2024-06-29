@@ -48,12 +48,12 @@ $r(t) = r_p(t) + a \cdot r_s(t) - b \cdot \vert\vert\omega_t\vert\vert^2 + r_T$
 경로 진행도 보상 $r_p(t)$는 다음과 같이 계산된다:
 $r_p(t) = s(p_c(t)) - s(p_c(t-1))$
 
-여기서 $s(p) = (p - g_1) · (g_2 - g_1) / ||g_2 - g_1||$이며, $p_c$는 드론의 현재 위치, $g_1$과 $g_2$는 연속된 두 게이트의 중심 위치이다.
+여기서 $s(p) = \frac{(p - g_1)\cdot (g_2 - g_1)}{\vert\vert g_2 - g_1\vert\vert}$이며, $p_c$는 드론의 현재 위치, $g_1$과 $g_2$는 연속된 두 게이트의 중심 위치이다.
 
 안전 보상 $r_s(t)$는 다음과 같이 정의된다:
-$r_s(t) = -f^2 · (1 - exp(-0.5 · d_n^2 / v))$
+$r_s(t) = -f^2 \cdot (1 - \exp(-0.5 \cdot d_n^2 / v))$
 
-여기서 $f = max[1 - (d_p / d_{max}), 0.0]$이고 $v = max[(1 - f) · (w_g / 6), 0.05]$이다. $d_p$와 $d_n$은 각각 드론과 게이트 평면 사이의 거리, 드론과 게이트 법선 사이의 거리를 나타낸다.
+여기서 $f = \max[1 - (d_p / d_{\max}), 0.0]$이고 $v = \max[(1 - f) \cdot (w_g / 6), 0.05]$이다. $d_p$와 $d_n$은 각각 드론과 게이트 평면 사이의 거리, 드론과 게이트 법선 사이의 거리를 나타낸다.
 
 ## 정책 학습 기법
 
@@ -64,21 +64,21 @@ $r_s(t) = -f^2 · (1 - exp(-0.5 · d_n^2 / v))$
 
 드론의 동역학 모델(Dynamics Model)은 다음과 같이 표현된다:
 
-$\dot{p}{WB} &= v{WB}$
+$\dot{p}_{WB} = v{WB}$
 
-$\dot{q}{WB} &= \frac{1}{2}\Lambda(\omega_B) \cdot q{WB}$
+$\dot{q}_{WB} = \frac{1}{2}\Lambda(\omega_B) \cdot q_{WB}$
 
-$\dot{v}{WB} &= q{WB} \otimes c + g$
+$\dot{v}_{WB} = q_{WB} \otimes c + g$
 
-$\dot{\omega}_B &= J^{-1}(\eta - \omega_B \times J\omega_B)$
+$\dot{\omega}_B = J^{-1}(\eta - \omega_B \times J\omega_B)$
 
 여기서 $p_{WB}$, $v_{WB}$는 위치와 속도, $q_{WB}$는 쿼터니언 방향(Quaternion Orientation), $\omega_B$는 각속도(Angular Velocity)를 나타낸다.
 
 관측 및 행동 공간은 다음과 같이 생성된다:
-- 관측(Observation): $s_{track} = [o_1, α_1, ..., o_i, α_i, ...]$, $i ∈ [1, ..., N]$
-  - $o_i$: i번째 게이트의 구면 좌표계 관측값 $(p_r, p_θ, p_φ)$
-  - $α_i$: 게이트 법선과 드론-게이트 중심 벡터 사이의 각도
-- 행동(Action): $a = [f_1, f_2, f_3, f_4]$ (개별 로터 추력 명령)
+- 관측(Observation): $s_t^{\text{track}} = [o_1, \alpha_1, ..., o_i, \alpha_i, ...]$, $i \in [1, ..., N]$
+  - $o_i$: i번째 게이트의 구면 좌표계 관측값 $(p_r, p_\theta, p_\phi)$
+  - $\alpha_i$: 게이트 법선과 드론-게이트 중심 벡터 사이의 각도
+- 행동(Action): $a_t = [f_1, f_2, f_3, f_4]$ (개별 로터 추력 명령)
 
 ![관측 벡터와 네트워크 아키텍처](/assets/images/posts/2024-06-05/3.png)
 *관측 벡터와 네트워크 아키텍처*
@@ -89,9 +89,9 @@ $\dot{\omega}_B &= J^{-1}(\eta - \omega_B \times J\omega_B)$
 
 마지막으로, 랜덤 트랙 커리큘럼을 도입하여 정책의 일반화 성능을 향상시킨다. 학습 초기에는 비교적 단순한 트랙에서 시작하여 점진적으로 복잡한 트랙으로 난이도를 높여간다. 이러한 접근은 정책이 다양한 트랙 레이아웃에 적응할 수 있도록 한다. 랜덤 트랙 커리큘럼에서 트랙 생성기는 다음과 같이 정의된다:
 
-$T = [G_1, ..., G_{j+1}]$, $j ∈ [1, +∞)$
+$T = [G_1, ..., G_{j+1}]$, $j \in [1, +\infty)$
 
-여기서 $G_{j+1} = f(G_j, Δp, ΔR)$로, 상대적 위치와 방향으로 게이트를 정의한다.
+여기서 $G_{j+1} = f(G_j, \Delta p, \Delta R)$로, 상대적 위치와 방향으로 게이트를 정의한다.
 
 ## 실험 결과
 
