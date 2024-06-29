@@ -36,9 +36,11 @@ use_math: true
 
 State는 드론의 현재 상태와 게이트의 관측값으로 구성된다. 드론의 상태에는 위치, 속도, 자세, 각속도 등이 포함되며, 게이트 관측값은 드론을 기준으로 한 상대적 위치와 방향 정보를 포함한다. 이러한 상태 정보를 바탕으로 정책은 각 로터의 추력을 결정하는 action을 출력한다.
 
-드론의 성능을 평가하는 보상 함수는 다음과 같이 정의된다: $r(t) = r_p(t) + a·r_s(t) - b·||ω_t||^2 + r_T$
+드론의 성능을 평가하는 보상 함수는 다음과 같이 정의된다:
 
-여기서 $r_p(t)$는 경로 진행도 보상으로, 드론이 얼마나 효율적으로 경로를 따라가고 있는지를 평가한다. $r_s(t)$는 안전 보상으로, 드론이 게이트 중심을 정확히 통과하도록 유도한다. $||ω_t||^2$항은 과도한 회전을 억제하기 위한 각속도 페널티이며, $r_T$는 게이트와의 충돌 시 적용되는 페널티이다.
+$r(t) = r_p(t) + a \cdot r_s(t) - b \cdot \vert\vert\omega_t\vert\vert^2 + r_T$
+
+여기서 $r_p(t)$는 경로 진행도 보상으로, 드론이 얼마나 효율적으로 경로를 따라가고 있는지를 평가한다. $r_s(t)$는 안전 보상으로, 드론이 게이트 중심을 정확히 통과하도록 유도한다. \vert\vert\omega_t\vert\vert^2항은 과도한 회전을 억제하기 위한 각속도 페널티이며, $r_T$는 게이트와의 충돌 시 적용되는 페널티이다.
 
 ![경로 진행도 보상 계산 도식](/assets/images/posts/2024-06-05/2.png)
 *경로 진행도 보상 계산 도식*
@@ -62,12 +64,13 @@ $r_s(t) = -f^2 · (1 - exp(-0.5 · d_n^2 / v))$
 
 드론의 동역학 모델(Dynamics Model)은 다음과 같이 표현된다:
 
-$
-\dot{p}{WB} &= v{WB} \
-\dot{q}{WB} &= \frac{1}{2}\Lambda(\omega_B) \cdot q{WB} \
-\dot{v}{WB} &= q{WB} \otimes c + g \
-\dot{\omega}_B &= J^{-1}(\eta - \omega_B \times J\omega_B)
-$
+$\dot{p}{WB} &= v{WB}$
+
+$\dot{q}{WB} &= \frac{1}{2}\Lambda(\omega_B) \cdot q{WB}$
+
+$\dot{v}{WB} &= q{WB} \otimes c + g$
+
+$\dot{\omega}_B &= J^{-1}(\eta - \omega_B \times J\omega_B)$
 
 여기서 $p_{WB}$, $v_{WB}$는 위치와 속도, $q_{WB}$는 쿼터니언 방향(Quaternion Orientation), $\omega_B$는 각속도(Angular Velocity)를 나타낸다.
 
