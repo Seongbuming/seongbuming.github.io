@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Autonomous Drone Racing with Deep Reinforcement Learning
-subtitle:
+subtitle: Deep Reinforcement Learning을 활용한 자율 드론 레이싱
 categories: Paper
 tags: [Paper, Autonomous Drone]
 use_math: true
@@ -66,9 +66,9 @@ $r_s(t) = -f^2 \cdot (1 - \exp(-0.5 \cdot d_n^2 / v))$
 
 $\dot{p}_{WB} = v{WB}$
 
-$\dot{q}_{WB} = \frac{1}{2}Λ(\omega_B) \cdot q_{WB}$
+$\dot{q}_{WB} = \frac{1}{2}\Lambda(\omega_B) \cdot q_{WB}$
 
-$\dot{v}_{WB} = q_{WB} ⊙ c + g$
+$\dot{v}_{WB} = q_{WB} \bigodot c + g$
 
 $\dot{\omega}_B = J^{-1}(\eta - \omega_B \times J\omega_B)$
 
