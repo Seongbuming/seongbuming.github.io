@@ -44,8 +44,8 @@ Plausibility는 설명이 인간에게 얼마나 타당하게 보이는지를 �
 
 Faithfulness는 설명이 모델의 실제 의사결정 과정을 얼마나 정확하게 반영하는지를 평가한다.
 
-1. **Comprehensiveness (COMP)**: 원본 예측 확률에서 중요 토큰을 제거한 후의 예측 확률을 뺀다. $\text{COMP} = P(y|x) - P(y|x\ \backslash\ x_{important})$
-2. **Sufficiency (SUFF)**: 원본 예측 확률에서 중요 토큰만으로의 예측 확률을 뺀다. $\text{SUFF} = P(y|x) - P(y|x_{important})$
+1. **Comprehensiveness (COMP)**: 원본 예측 확률에서 중요 토큰을 제거한 후의 예측 확률을 뺀다. $\text{COMP} = P(y \vert x) - P(y \vert x\ \backslash\ x_{important})$
+2. **Sufficiency (SUFF)**: 원본 예측 확률에서 중요 토큰만으로의 예측 확률을 뺀다. $\text{SUFF} = P(y \vert x) - P(y \vert x_{important})$
 3. **Decision Flip - Fraction of Tokens (DFFOT)**: 결정이 뒤집힐 때까지 제거된 토큰의 평균 비율을 계산한다.
 4. **Decision Flip - Most Informative Token (TFMIT)**: 가장 영향력 있는 토큰 제거 시 결정이 뒤집히는 비율을 계산한다.
 
