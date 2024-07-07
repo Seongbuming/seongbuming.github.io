@@ -34,25 +34,25 @@ Explainability의 평가는 크게 두 가지 측면에서 이루어진다: plau
 
 Plausibility는 설명이 인간에게 얼마나 타당하게 보이는지를 평가한다.
 
-1. **Intersection-Over-Union (IOU)**: $$\text{IOU} = \frac{\text{인간 주석 토큰} \cap \text{모델 생성 토큰}}{\text{인간 주석 토큰} \cup \text{모델 생성 토큰}}$$
-2. **Precision**: $$\text{Precision} = \frac{\text{정확히 식별된 중요 토큰 수}}{\text{모델이 식별한 총 토큰 수}}$$
-3. **Recall**: $$\text{Recall} = \frac{\text{정확히 식별된 중요 토큰 수}}{\text{실제 중요 토큰의 총 수}}$$
-4. **F1 score**: $$\text{F1 Score} = 2 \times \frac{\text{Precision} \times \text{Recall}}{\text{Precision} + \text{Recall}}$$
+1. **Intersection-Over-Union (IOU)**: $\text{IOU} = \frac{\text{인간 주석 토큰} \cap \text{모델 생성 토큰}}{\text{인간 주석 토큰} \cup \text{모델 생성 토큰}}$
+2. **Precision**: $\text{Precision} = \frac{\text{정확히 식별된 중요 토큰 수}}{\text{모델이 식별한 총 토큰 수}}$
+3. **Recall**: $\text{Recall} = \frac{\text{정확히 식별된 중요 토큰 수}}{\text{실제 중요 토큰의 총 수}}$
+4. **F1 score**: $\text{F1 Score} = 2 \times \frac{\text{Precision} \times \text{Recall}}{\text{Precision} + \text{Recall}}$
 5. **Area Under the Precision Recall Curve (AUPRC)**: 다양한 임계값에 대한 Precision-Recall 곡선의 아래 영역을 계산한다.
 
 ### 3.2. Faithfulness 평가
 
 Faithfulness는 설명이 모델의 실제 의사결정 과정을 얼마나 정확하게 반영하는지를 평가한다.
 
-1. **Comprehensiveness (COMP)**: 원본 예측 확률에서 중요 토큰을 제거한 후의 예측 확률을 뺀다. $$\text{COMP} = P(y|x) - P(y|x\ \backslash\ x_{important})$$
-2. **Sufficiency (SUFF)**: 원본 예측 확률에서 중요 토큰만으로의 예측 확률을 뺀다. $$\text{SUFF} = P(y|x) - P(y|x_{important})$$
+1. **Comprehensiveness (COMP)**: 원본 예측 확률에서 중요 토큰을 제거한 후의 예측 확률을 뺀다. $\text{COMP} = P(y|x) - P(y|x\ \backslash\ x_{important})$
+2. **Sufficiency (SUFF)**: 원본 예측 확률에서 중요 토큰만으로의 예측 확률을 뺀다. $\text{SUFF} = P(y|x) - P(y|x_{important})$
 3. **Decision Flip - Fraction of Tokens (DFFOT)**: 결정이 뒤집힐 때까지 제거된 토큰의 평균 비율을 계산한다.
 4. **Decision Flip - Most Informative Token (TFMIT)**: 가장 영향력 있는 토큰 제거 시 결정이 뒤집히는 비율을 계산한다.
 
 ### 3.3. Prompting 패러다임에 특화도니 평가
 
 1. **Simulation generality**: 설명이 도움이 되는 다양한 counterfactual 입력의 수를 측정한다.
-2. **Simulation precision**: $$\text{Simulation Precision} = \frac{\text{인간 예측과 일치하는 모델 출력 수}}{\text{총 시뮬레이션된 counterfactual 수}}$$
+2. **Simulation precision**: $\text{Simulation Precision} = \frac{\text{인간 예측과 일치하는 모델 출력 수}}{\text{총 시뮬레이션된 counterfactual 수}}$
 
 ## 4. 평가 시 고려사항과 과제
 
